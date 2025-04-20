@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Box, 
-  Flex, 
   Heading, 
   Input, 
   InputGroup, 
@@ -11,8 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { FiSearch, FiUserPlus } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../components/Sidebar';
-import UsersTable from '../components/UsersTable';
+import UsersTable from '../../components/UsersTable';
 
 // Mock data for users - expanded for pagination example
 const initialUsers = [
@@ -34,16 +32,11 @@ const initialUsers = [
 ];
 
 function Users() {
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState(initialUsers);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const navigate = useNavigate();
-  
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
 
   // Filter users based on search query
   const filteredUsers = users.filter(user => 
@@ -80,7 +73,7 @@ function Users() {
   // Handle user actions
   const handleEdit = (userId) => {
     console.log(`Edit user with ID: ${userId}`);
-    // In a real app, navigate to edit page or open modal
+    navigate(`/users/edit/${userId}`);
   };
 
   const handleDelete = (userId) => {
@@ -91,7 +84,7 @@ function Users() {
 
   const handleView = (userId) => {
     console.log(`View user with ID: ${userId}`);
-    // In a real app, navigate to user details page
+    navigate(`/users/view/${userId}`);
   };
 
   const handleAddUser = () => {
@@ -101,62 +94,51 @@ function Users() {
   const bgColor = useColorModeValue('white', 'gray.800');
 
   return (
-    <Flex h="100vh">
-      {/* Sidebar */}
-      <Sidebar isOpen={isSidebarOpen} onToggle={toggleSidebar} />
+    <>
+      <Heading mb={6}>Users</Heading>
       
-      {/* Main Content */}
-      <Box
-        flex="1"
-        ml={isSidebarOpen ? "240px" : "60px"}
-        transition="margin-left 0.3s ease"
-        p={8}
-      >
-        <Heading mb={6}>Users</Heading>
-        
-        {/* Search and Add User */}
-        <Flex mb={6} justifyContent="space-between">
-          <InputGroup maxW="400px">
-            <InputLeftElement pointerEvents="none">
-              <FiSearch color="gray.300" />
-            </InputLeftElement>
-            <Input 
-              placeholder="Search by username or email" 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </InputGroup>
-          
-          <Button 
-            leftIcon={<FiUserPlus />} 
-            colorScheme="blue" 
-            onClick={handleAddUser}
-          >
-            Add User
-          </Button>
-        </Flex>
-        
-        {/* Users Table with Pagination */}
-        <Box 
-          bg={bgColor} 
-          borderRadius="md" 
-          boxShadow="sm" 
-          overflow="hidden"
-        >
-          <UsersTable 
-            users={getCurrentPageData()} 
-            onEdit={handleEdit} 
-            onDelete={handleDelete} 
-            onView={handleView}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-            pageSize={pageSize}
-            onPageSizeChange={handlePageSizeChange}
+      {/* Search and Add User */}
+      <Box mb={6} display="flex" justifyContent="space-between">
+        <InputGroup maxW="400px">
+          <InputLeftElement pointerEvents="none">
+            <FiSearch color="gray.300" />
+          </InputLeftElement>
+          <Input 
+            placeholder="Search by username or email" 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
-        </Box>
+        </InputGroup>
+        
+        <Button 
+          leftIcon={<FiUserPlus />} 
+          colorScheme="blue" 
+          onClick={handleAddUser}
+        >
+          Add User
+        </Button>
       </Box>
-    </Flex>
+      
+      {/* Users Table with Pagination */}
+      <Box 
+        bg={bgColor} 
+        borderRadius="md" 
+        boxShadow="sm" 
+        overflow="hidden"
+      >
+        <UsersTable 
+          users={getCurrentPageData()} 
+          onEdit={handleEdit} 
+          onDelete={handleDelete} 
+          onView={handleView}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          pageSize={pageSize}
+          onPageSizeChange={handlePageSizeChange}
+        />
+      </Box>
+    </>
   );
 }
 

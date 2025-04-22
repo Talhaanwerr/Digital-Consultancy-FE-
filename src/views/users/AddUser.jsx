@@ -10,13 +10,10 @@ import {
   HStack,
   Switch,
   FormHelperText,
-  useToast,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink
+  useToast
 } from '@chakra-ui/react';
-import { FiChevronRight } from 'react-icons/fi';
 import { useNavigate, Link } from 'react-router-dom';
+import BreadcrumbNav from '../../components/BreadcrumbNav';
 
 function AddUser() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -75,22 +72,12 @@ function AddUser() {
 
   return (
     <>
-      {/* Breadcrumb */}
-      <Breadcrumb 
-        spacing="8px" 
-        separator={<FiChevronRight color="gray.500" />}
-        mb={6}
-      >
-        <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/dashboard">Dashboard</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/users">Users</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink>Add User</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>
+      <BreadcrumbNav 
+        items={[
+          { label: 'Users', path: '/users' },
+          { label: 'Add User', path: '#', isCurrentPage: true }
+        ]}
+      />
 
       <Heading mb={6}>Add New User</Heading>
       

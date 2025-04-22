@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
+import { Outlet } from 'react-router-dom';
 
-function MainLayout({ children }) {
+function MainLayout() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   
   const toggleSidebar = () => {
@@ -21,10 +22,10 @@ function MainLayout({ children }) {
         transition="margin-left 0.3s ease"
         p={8}
       >
-        {children}
+        <Outlet />
       </Box>
     </Flex>
   );
 }
 
-export default MainLayout; 
+export default MainLayout;

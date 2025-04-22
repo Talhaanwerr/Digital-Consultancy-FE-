@@ -29,6 +29,8 @@ function UsersTable({
   onPageSizeChange
 }) {
   // Function to render status badge with appropriate color
+
+  console.log("sdsdsd", users)
   const renderStatus = (status) => {
     const colorScheme = status === 'active' ? 'green' : 'red';
     return (

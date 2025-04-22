@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Heading, Text } from '@chakra-ui/react';
 
 function Dashboard() {
+  console.log("Dashboard component rendered");
   return (
     <>
       <Heading mb={6}>Dashboard</Heading>

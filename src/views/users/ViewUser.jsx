@@ -10,16 +10,14 @@ import {
   Spinner,
   Alert,
   AlertIcon,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   Divider,
   Grid,
   GridItem,
   useColorModeValue
 } from '@chakra-ui/react';
-import { FiChevronRight, FiEdit } from 'react-icons/fi';
+import { FiEdit } from 'react-icons/fi';
 import { useNavigate, useParams, Link } from 'react-router-dom';
+import BreadcrumbNav from '../../components/BreadcrumbNav';
 
 // Mock data for users - same as in Users.jsx
 const mockUsers = [
@@ -95,21 +93,12 @@ function ViewUser() {
 
   return (
     <>
-      {/* Breadcrumb Navigation */}
-      <Breadcrumb 
-        separator={<FiChevronRight color="gray.500" />}
-        mb={6}
-      >
-        <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/dashboard">Dashboard</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/users">Users</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink>View User</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>
+      <BreadcrumbNav 
+        items={[
+          { label: 'Users', path: '/users' },
+          { label: 'View User', path: '#', isCurrentPage: true }
+        ]}
+      />
       
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={6}>
         <Heading>User Details</Heading>

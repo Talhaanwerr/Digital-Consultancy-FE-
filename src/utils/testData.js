@@ -1,5 +1,13 @@
+// Company Return Filing
+// 1. taxYear     2. businessNature     3. businessType(partnership/Nonprofit Organisation/Private Limited)
+// 4. applicationStatus(active/rejected/requested)     5. invoiceStatus(paid/unpaid)     6. receiptImageUrl
+// 7. userId     8. bankStatementPdfUrl    9. financialStatementPdfUrl     10. assignTo(user id)
+
+
+
 const ntnData = [
   {
+    id: 1,
     telecom: "ufone",
     cnicFrontUrl:
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
@@ -21,6 +29,7 @@ const ntnData = [
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
   },
   {
+    id: 2,
     telecom: "jazz",
     cnicFrontUrl:
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
@@ -42,6 +51,7 @@ const ntnData = [
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
   },
   {
+    id: 3,
     telecom: "jazz",
     cnicFrontUrl:
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
@@ -63,6 +73,7 @@ const ntnData = [
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
   },
   {
+    id: 4,
     telecom: "jazz",
     cnicFrontUrl:
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
@@ -84,6 +95,7 @@ const ntnData = [
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
   },
   {
+    id: 5,
     telecom: "jazz",
     cnicFrontUrl:
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
@@ -108,6 +120,7 @@ const ntnData = [
 
 const salesTaxData = [
   {
+    id: 1,
     taxYear: "2024",
     taxMonth: "July",
     invoiceStatus: "paid", //green
@@ -131,6 +144,7 @@ const salesTaxData = [
     ],
   },
   {
+    id: 2,
     taxYear: "2024",
     taxMonth: "July",
     invoiceStatus: "unpaid", //red
@@ -153,8 +167,8 @@ const salesTaxData = [
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
     ],
   },
-
   {
+    id: 3,
     taxYear: "2024",
     taxMonth: "July",
     invoiceStatus: "paid", //green
@@ -177,8 +191,8 @@ const salesTaxData = [
       "https://storage.googleapis.com/support-forums-api/attachment/thread-263408013-12838375264202129337.jpeg",
     ],
   },
-
   {
+    id: 4,
     taxYear: "2024",
     taxMonth: "July",
     invoiceStatus: "paid", //green

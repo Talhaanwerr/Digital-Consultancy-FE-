@@ -11,15 +11,12 @@ import {
   Switch,
   FormHelperText,
   useToast,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   Spinner,
   Alert,
   AlertIcon
 } from '@chakra-ui/react';
-import { FiChevronRight } from 'react-icons/fi';
 import { useNavigate, useParams, Link } from 'react-router-dom';
+import BreadcrumbNav from '../../components/BreadcrumbNav';
 
 // Mock data for users - same as in Users.jsx
 const mockUsers = [
@@ -146,21 +143,12 @@ function EditUser() {
 
   return (
     <>
-      {/* Breadcrumb Navigation */}
-      <Breadcrumb 
-        separator={<FiChevronRight color="gray.500" />}
-        mb={6}
-      >
-        <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/dashboard">Dashboard</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/users">Users</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink>Edit User</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>
+      <BreadcrumbNav 
+        items={[
+          { label: 'Users', path: '/users' },
+          { label: 'Edit User', path: '#', isCurrentPage: true }
+        ]}
+      />
       
       <Heading mb={6}>Edit User</Heading>
       

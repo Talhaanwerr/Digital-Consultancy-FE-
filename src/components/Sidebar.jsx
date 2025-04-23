@@ -25,7 +25,9 @@ import {
   FiChevronRight,
   FiUser,
   FiPlus,
-  FiLock
+  FiLock,
+  FiHelpCircle,
+  FiLogOut
 } from 'react-icons/fi';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -43,6 +45,7 @@ const menuItems = [
     ]
   },
   { name: 'Company Return Filing', icon: FiFileText, path: '/company-return-filing' },
+  { name: 'FAQs', icon: FiHelpCircle, path: '/faqs' },
 ];
 
 function Sidebar({ isOpen, onToggle }) {
@@ -59,6 +62,15 @@ function Sidebar({ isOpen, onToggle }) {
       ...prev,
       [name]: !prev[name]
     }));
+  };
+
+  // Handle logout
+  const handleLogout = () => {
+    // In a real app, you would clear auth tokens, user data, etc.
+    console.log('User logged out');
+    
+    // Navigate to login page
+    navigate('/login');
   };
 
   // Check if a submenu should be open based on active route
@@ -158,6 +170,8 @@ function Sidebar({ isOpen, onToggle }) {
       transition="width 0.3s ease"
       boxShadow="md"
       overflowY="auto"
+      display="flex"
+      flexDirection="column"
     >
       {/* Logo and Toggle Button */}
       <Flex 
@@ -187,9 +201,32 @@ function Sidebar({ isOpen, onToggle }) {
       <Box borderBottomWidth="1px" borderColor="whiteAlpha.300" />
       
       {/* Menu Items */}
-      <VStack align="stretch" spacing={0} mt={2}>
+      <VStack align="stretch" spacing={0} mt={2} flex="1">
         {menuItems.map(renderMenuItem)}
       </VStack>
+      
+      {/* Logout Button */}
+      <Box borderTopWidth="1px" borderColor="whiteAlpha.300" p={2}>
+        <Tooltip
+          label="Logout"
+          placement="right"
+          isDisabled={isOpen}
+          hasArrow
+        >
+          <Flex
+            p={3}
+            alignItems="center"
+            cursor="pointer"
+            _hover={{ bg: 'blue.600' }}
+            borderRadius="md"
+            justifyContent={isOpen ? "flex-start" : "center"}
+            onClick={handleLogout}
+          >
+            <Icon as={FiLogOut} boxSize={5} />
+            {isOpen && <Text ml={3}>Logout</Text>}
+          </Flex>
+        </Tooltip>
+      </Box>
     </Box>
   );
 }

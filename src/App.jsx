@@ -1,7 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./views/Dashboard";
-import Login from "./views/Login";
+// Import auth pages
+import Login from "./views/auth/Login";
+import Register from "./views/auth/Register";
+import ForgotPassword from "./views/auth/ForgotPassword";
+import VerifyOTP from "./views/auth/VerifyOTP";
+import ResetPassword from "./views/auth/ResetPassword";
 import Users from "./views/users/Users";
 import AddUser from "./views/users/AddUser";
 import EditUser from "./views/users/EditUser";
@@ -15,12 +20,22 @@ import PrivateLimited from "./views/business/PrivateLimited";
 import CompanyReturnFiling from "./views/company/CompanyReturnFiling";
 import ViewCompanyReturn from "./views/company/ViewCompanyReturn";
 
+// Import FAQ Pages
+import FAQList from "./views/faq/FAQList";
+import FAQForm from "./views/faq/FAQForm";
+import ViewFAQ from "./views/faq/ViewFAQ";
+
 const App = () => {
   console.log("App component rendered");
   return (
     <BrowserRouter>
       <Routes>
+        {/* Auth routes - public, outside MainLayout */}
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password/verify" element={<VerifyOTP />} />
+        <Route path="/forgot-password/reset" element={<ResetPassword />} />
 
         {/* Dashboard routes wrapped with MainLayout */}
         <Route element={<MainLayout />}>
@@ -53,6 +68,12 @@ const App = () => {
             path="/company-return-filing/view/:id"
             element={<ViewCompanyReturn />}
           />
+
+          {/* FAQ Routes */}
+          <Route path="/faqs" element={<FAQList />} />
+          <Route path="/faqs/new" element={<FAQForm />} />
+          <Route path="/faqs/edit/:id" element={<FAQForm />} />
+          <Route path="/faqs/view/:id" element={<ViewFAQ />} />
         </Route>
 
         {/* Redirect to login by default */}

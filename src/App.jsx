@@ -20,6 +20,10 @@ import PrivateLimited from "./views/business/PrivateLimited";
 import CompanyReturnFiling from "./views/company/CompanyReturnFiling";
 import ViewCompanyReturn from "./views/company/ViewCompanyReturn";
 
+// Import NTN Management Pages
+import NTNList from "./views/ntn/NTNList";
+import ViewNTN from "./views/ntn/ViewNTN";
+
 // Import FAQ Pages
 import FAQList from "./views/faq/FAQList";
 import FAQForm from "./views/faq/FAQForm";
@@ -68,6 +72,10 @@ const App = () => {
             path="/company-return-filing/view/:id"
             element={<ViewCompanyReturn />}
           />
+
+          {/* NTN Management Routes */}
+          <Route path="/ntn" element={<NTNList />} />
+          <Route path="/ntn/view/:id" element={<ViewNTN />} />
 
           {/* FAQ Routes */}
           <Route path="/faqs" element={<FAQList />} />

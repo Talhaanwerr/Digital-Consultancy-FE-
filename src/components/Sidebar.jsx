@@ -35,6 +35,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const menuItems = [
   { name: 'Dashboard', icon: FiHome, path: '/dashboard' },
   { name: 'Users', icon: FiUsers, path: '/users' },
+  { name: 'NTN Registration', icon: FiFileText, path: '/ntn' },
   { 
     name: 'Business Registration', 
     icon: FiBriefcase, 

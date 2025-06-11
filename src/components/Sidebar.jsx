@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Flex,
@@ -10,13 +10,13 @@ import {
   Tooltip,
   Spacer,
   Collapse,
-  Stack
-} from '@chakra-ui/react';
-import { 
-  FiHome, 
-  FiUsers, 
-  FiSettings, 
-  FiMenu, 
+  Stack,
+} from "@chakra-ui/react";
+import {
+  FiHome,
+  FiUsers,
+  FiSettings,
+  FiMenu,
   FiChevronLeft,
   FiBarChart2,
   FiFileText,
@@ -27,26 +27,45 @@ import {
   FiPlus,
   FiLock,
   FiHelpCircle,
-  FiLogOut
-} from 'react-icons/fi';
-import { useNavigate, useLocation } from 'react-router-dom';
+  FiLogOut,
+  FiDollarSign,
+  FiList,
+} from "react-icons/fi";
+import { useNavigate, useLocation } from "react-router-dom";
 
 // Menu items configuration
 const menuItems = [
-  { name: 'Dashboard', icon: FiHome, path: '/dashboard' },
-  { name: 'Users', icon: FiUsers, path: '/users' },
-  { name: 'NTN Registration', icon: FiFileText, path: '/ntn' },
-  { 
-    name: 'Business Registration', 
-    icon: FiBriefcase, 
+  { name: "Dashboard", icon: FiHome, path: "/dashboard" },
+  { name: "Users", icon: FiUsers, path: "/users" },
+  { name: "NTN Registration", icon: FiFileText, path: "/ntn" },
+  { name: "Sales Tax", icon: FiDollarSign, path: "/salestax" },
+  {
+    name: "Business Registration",
+    icon: FiBriefcase,
     children: [
-      { name: 'Sole Proprietor', path: '/business/sole-proprietor', icon: FiUser },
-      { name: 'Addition / deletion of Business to NTN', path: '/business/ntn-modification', icon: FiPlus },
-      { name: 'Private Limited', path: '/business/private-limited', icon: FiLock }
-    ]
+      {
+        name: "Sole Proprietor",
+        path: "/business/sole-proprietor",
+        icon: FiUser,
+      },
+      {
+        name: "Addition / deletion of Business to NTN",
+        path: "/business/ntn-modification",
+        icon: FiPlus,
+      },
+      {
+        name: "Private Limited",
+        path: "/business/private-limited",
+        icon: FiLock,
+      },
+    ],
   },
-  { name: 'Company Return Filing', icon: FiFileText, path: '/company-return-filing' },
-  { name: 'FAQs', icon: FiHelpCircle, path: '/faqs' },
+  {
+    name: "Company Return Filing",
+    icon: FiFileText,
+    path: "/company-return-filing",
+  },
+  { name: "FAQs", icon: FiHelpCircle, path: "/faqs" },
 ];
 
 function Sidebar({ isOpen, onToggle }) {
@@ -59,49 +78,49 @@ function Sidebar({ isOpen, onToggle }) {
   };
 
   const toggleSubmenu = (name) => {
-    setOpenSubmenus(prev => ({
+    setOpenSubmenus((prev) => ({
       ...prev,
-      [name]: !prev[name]
+      [name]: !prev[name],
     }));
   };
 
   // Handle logout
   const handleLogout = () => {
     // In a real app, you would clear auth tokens, user data, etc.
-    console.log('User logged out');
-    
+    console.log("User logged out");
+
     // Navigate to login page
-    navigate('/login');
+    navigate("/login");
   };
 
   // Check if a submenu should be open based on active route
   const isSubmenuOpen = (item) => {
     if (!item.children) return false;
-    
+
     // Open if explicitly toggled
     if (openSubmenus[item.name]) return true;
-    
+
     // Open if a child route is active
-    const isChildActive = item.children.some(child => 
+    const isChildActive = item.children.some((child) =>
       location.pathname.startsWith(child.path)
     );
-    
+
     return isChildActive;
   };
 
   // Function to render a menu item (both regular and parent items)
   const renderMenuItem = (item) => {
     const hasChildren = item.children && item.children.length > 0;
-    const isActive = hasChildren 
-      ? item.children.some(child => location.pathname === child.path)
+    const isActive = hasChildren
+      ? item.children.some((child) => location.pathname === child.path)
       : location.pathname === item.path;
     const submenuOpen = isSubmenuOpen(item);
 
     return (
       <Box key={item.name}>
-        <Tooltip 
-          label={item.name} 
-          placement="right" 
+        <Tooltip
+          label={item.name}
+          placement="right"
           isDisabled={isOpen}
           hasArrow
         >
@@ -109,18 +128,24 @@ function Sidebar({ isOpen, onToggle }) {
             p={3}
             alignItems="center"
             cursor="pointer"
-            bg={isActive ? 'blue.600' : 'transparent'}
-            _hover={{ bg: 'blue.600' }}
+            bg={isActive ? "blue.600" : "transparent"}
+            _hover={{ bg: "blue.600" }}
             justifyContent={isOpen ? "flex-start" : "center"}
-            onClick={hasChildren ? () => toggleSubmenu(item.name) : () => handleNavigation(item.path)}
+            onClick={
+              hasChildren
+                ? () => toggleSubmenu(item.name)
+                : () => handleNavigation(item.path)
+            }
           >
             <Icon as={item.icon} boxSize={5} />
             {isOpen && (
               <>
-                <Text ml={3} flex="1">{item.name}</Text>
+                <Text ml={3} flex="1">
+                  {item.name}
+                </Text>
                 {hasChildren && (
-                  <Icon 
-                    as={submenuOpen ? FiChevronDown : FiChevronRight} 
+                  <Icon
+                    as={submenuOpen ? FiChevronDown : FiChevronRight}
                     boxSize={4}
                   />
                 )}
@@ -132,10 +157,16 @@ function Sidebar({ isOpen, onToggle }) {
         {/* Submenu items */}
         {hasChildren && isOpen && (
           <Collapse in={submenuOpen} animateOpacity>
-            <Stack spacing={0} pl={4} borderLeftWidth="1px" borderColor="whiteAlpha.300" ml={4}>
+            <Stack
+              spacing={0}
+              pl={4}
+              borderLeftWidth="1px"
+              borderColor="whiteAlpha.300"
+              ml={4}
+            >
               {item.children.map((child) => {
                 const isChildActive = location.pathname === child.path;
-                
+
                 return (
                   <Flex
                     key={child.name}
@@ -143,8 +174,8 @@ function Sidebar({ isOpen, onToggle }) {
                     pl={3}
                     alignItems="center"
                     cursor="pointer"
-                    bg={isChildActive ? 'blue.500' : 'transparent'}
-                    _hover={{ bg: 'blue.500' }}
+                    bg={isChildActive ? "blue.500" : "transparent"}
+                    _hover={{ bg: "blue.500" }}
                     onClick={() => handleNavigation(child.path)}
                     fontSize="sm"
                   >
@@ -175,16 +206,16 @@ function Sidebar({ isOpen, onToggle }) {
       flexDirection="column"
     >
       {/* Logo and Toggle Button */}
-      <Flex 
-        p={3} 
-        alignItems="center" 
+      <Flex
+        p={3}
+        alignItems="center"
         justifyContent={isOpen ? "space-between" : "center"}
       >
         {isOpen && (
-          <Image 
-            src="https://via.placeholder.com/40" 
-            alt="Logo" 
-            boxSize="40px" 
+          <Image
+            src="https://via.placeholder.com/40"
+            alt="Logo"
+            boxSize="40px"
             borderRadius="md"
           />
         )}
@@ -194,31 +225,26 @@ function Sidebar({ isOpen, onToggle }) {
           onClick={onToggle}
           variant="ghost"
           color="white"
-          _hover={{ bg: 'blue.600' }}
+          _hover={{ bg: "blue.600" }}
         />
       </Flex>
-      
+
       {/* Separator - using Box instead of Divider */}
       <Box borderBottomWidth="1px" borderColor="whiteAlpha.300" />
-      
+
       {/* Menu Items */}
       <VStack align="stretch" spacing={0} mt={2} flex="1">
         {menuItems.map(renderMenuItem)}
       </VStack>
-      
+
       {/* Logout Button */}
       <Box borderTopWidth="1px" borderColor="whiteAlpha.300" p={2}>
-        <Tooltip
-          label="Logout"
-          placement="right"
-          isDisabled={isOpen}
-          hasArrow
-        >
+        <Tooltip label="Logout" placement="right" isDisabled={isOpen} hasArrow>
           <Flex
             p={3}
             alignItems="center"
             cursor="pointer"
-            _hover={{ bg: 'blue.600' }}
+            _hover={{ bg: "blue.600" }}
             borderRadius="md"
             justifyContent={isOpen ? "flex-start" : "center"}
             onClick={handleLogout}

@@ -3,8 +3,6 @@
 // 4. applicationStatus(active/rejected/requested)     5. invoiceStatus(paid/unpaid)     6. receiptImageUrl
 // 7. userId     8. bankStatementPdfUrl    9. financialStatementPdfUrl     10. assignTo(user id)
 
-
-
 const ntnData = [
   {
     id: 1,
@@ -216,3 +214,5 @@ const salesTaxData = [
     ],
   },
 ];
+
+export { ntnData, salesTaxData };

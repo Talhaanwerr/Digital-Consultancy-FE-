@@ -24,6 +24,10 @@ import ViewCompanyReturn from "./views/company/ViewCompanyReturn";
 import NTNList from "./views/ntn/NTNList";
 import ViewNTN from "./views/ntn/ViewNTN";
 
+// Import Sales Tax Management Pages
+import SalesTaxList from "./views/salestax/SalesTaxList";
+import ViewSalesTax from "./views/salestax/ViewSalesTax";
+
 // Import FAQ Pages
 import FAQList from "./views/faq/FAQList";
 import FAQForm from "./views/faq/FAQForm";
@@ -76,6 +80,11 @@ const App = () => {
           {/* NTN Management Routes */}
           <Route path="/ntn" element={<NTNList />} />
           <Route path="/ntn/view/:id" element={<ViewNTN />} />
+
+          {/* Sales Tax Management Routes */}
+          <Route path="/salestax" element={<SalesTaxList />} />
+          <Route path="/salestax/view/:id" element={<ViewSalesTax />} />
+
 
           {/* FAQ Routes */}
           <Route path="/faqs" element={<FAQList />} />

@@ -182,7 +182,7 @@ function Sidebar({ isOpen, onToggle }) {
       >
         {isOpen && (
           <Image 
-            src="https://via.placeholder.com/40" 
+            src="https://portal.digitalconsultantservices.com/assets/images/logo.jpeg" 
             alt="Logo" 
             boxSize="40px" 
             borderRadius="md"
